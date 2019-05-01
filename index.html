@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="d3.v3.js"></script>
+        <script type="text/javascript" src="/d3-parsets-master/d3.parsets.js"></script>
+        <link type="text/css" rel="styleSheet"  href="/d3-parsets-master/d3.parsets.css" />
+
+    </head>
+    <style type="text/css">
+    </style>
+    <body>
+        <script type="text/javascript">
+            var dataset = [];
+            var w = 500;
+            var h = 100;
+            var b = 1;
+            var n = 20;
+            for(var i = 0;i<n ;i++){
+                var newNumber = Math.round(Math.random() * 20);
+                dataset.push(newNumber);
+            }
+            var svg = d3.select("body").append("svg");
+            svg.attr("width",w)
+               .attr("height",h);
+            svg.selectAll("rect")
+               .data(dataset)
+               .enter()
+               .append("rect")
+               .attr("x",function(d,i){
+                   return i*(w / dataset.length);
+               })
+               .attr("y",function(d){
+                   return h-d*5;
+               })
+               .attr("width",w / dataset.length - b)
+               .attr("height",function(d){
+                   return d*5;
+               })
+               .attr("x",function(d,i){
+                   return i*(w / dataset.length);
+               })
+               .attr("fill",function(d){
+                   return "rgb(0,0,"+(d*10)+")";
+               });
+            svg.selectAll("text")
+               .data(dataset)
+               .enter()
+               .append("text")
+               .text(function(d){
+                   return d;
+               })
+               .attr("text-anchor", "middle")
+               .attr("x",function(d,i){
+                   return i*(w / dataset.length)+(w / dataset.length - b)/2;
+               })
+               .attr("y",function(d){
+                   return h-d*5 +10;
+               })
+               .attr("font-family", "sans-serif")
+               .attr("font-size", "11px")
+               .attr("fill", "white");
+            // Your beautiful D3 code will go here
+            var chart = d3.parsets()
+                .dimensions(["Survived", "Sex", "Age", "Class"]);
+
+            var vis = d3.select("body").append("svg")
+                .attr("width", chart.width())
+                .attr("height", chart.height());
+
+            d3.csv("titanic.csv", function(error, csv) {
+                vis.datum(csv).call(chart);
+            });
+        </script>
+    </body>
+</html> 
