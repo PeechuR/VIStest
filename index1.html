@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+       <script src="echarts.min.js"></script>
+       <script type="text/javascript">
+       
+       $.get("https://raw.githubusercontent.com/PeechuR/VIStest/master/YearsSales201602.csv", function(data){
+        var temp = []; 
+ //           for (i in data.split('\n')){
+ //               temp = data.split(',')
+ //           }
+ //           console.log(temp);
+ //          });
+        var mdata = temp;
+        var ndata = [];
+        var sdata = [];
+        var pdata = [];
+
+        var random = function (max) {
+            return (Math.random() * max).toFixed(3);
+        };
+
+        for (var i = 0; i < 500; i++) {
+            data1.push([random(15), random(10), random(1)]);
+            data2.push([random(10), random(10), random(1)]);
+            data3.push([random(15), random(10), random(1)]);
+        }
+
+        option = {
+            animation: false,
+            legend: {
+                data: ['scatter', 'scatter2', 'scatter3']
+            },
+            tooltip: {
+            },
+            xAxis: {
+                type: 'value',
+                min: 'dataMin',
+                max: 'dataMax',
+                splitLine: {
+                    show: true
+                }
+            },
+            yAxis: {
+                type: 'value',
+                min: 'dataMin',
+                max: 'dataMax',
+                splitLine: {
+                    show: true
+                }
+            },
+            dataZoom: [
+                {
+                    type: 'slider',
+                    show: true,
+                    xAxisIndex: [0],
+                    start: 1,
+                    end: 35
+                },
+                {
+                    type: 'slider',
+                    show: true,
+                    yAxisIndex: [0],
+                    left: '93%',
+                    start: 29,
+                    end: 36
+                },
+                {
+                    type: 'inside',
+                    xAxisIndex: [0],
+                    start: 1,
+                    end: 35
+                },
+                {
+                    type: 'inside',
+                    yAxisIndex: [0],
+                    start: 29,
+                    end: 36
+                }
+            ],
+            series: [
+                {
+                    name: 'scatter',
+                    type: 'scatter',
+                    itemStyle: {
+                        normal: {
+                            opacity: 0.8
+                        }
+                    },
+                    symbolSize: function (val) {
+                        return val[2] * 40;
+                    },
+                    data: data1
+                },
+                {
+                    name: 'scatter2',
+                    type: 'scatter',
+                    itemStyle: {
+                        normal: {
+                            opacity: 0.8
+                        }
+                    },
+                    symbolSize: function (val) {
+                        return val[2] * 40;
+                    },
+                    data: data2
+                },
+                {
+                    name: 'scatter3',
+                    type: 'scatter',
+                    itemStyle: {
+                        normal: {
+                            opacity: 0.8,
+                        }
+                    },
+                    symbolSize: function (val) {
+                        return val[2] * 40;
+                    },
+                    data: data3
+                }
+            ]
+        }
+       </script>
+   </body>
+</html>
