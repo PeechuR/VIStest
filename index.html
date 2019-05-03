@@ -4,32 +4,36 @@
        <meta charset="utf-8">
    </head>
    <body style="height: 100%; margin: 0">
-       <div id="container" style="height: 100%"></div>
-       <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
-       <script src="echarts.min.js"></script>
-       <script type="text/javascript">
-       
-       $.get("https://raw.githubusercontent.com/PeechuR/VIStest/master/YearsSales201602.csv", function(data){
-        var temp = []; 
- //           for (i in data.split('\n')){
- //               temp = data.split(',')
- //           }
- //           console.log(temp);
- //          });
-        var mdata = temp;
+        <div id="container" style="height: 100%"></div>
+        <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+        <script src="echarts.min.js"></script>
+        <script type="text/javascript">
+        var mdata = [];
         var ndata = [];
         var sdata = [];
         var pdata = [];
+        $.get("https://raw.githubusercontent.com/PeechuR/VIStest/master/MS.csv", function(data){
+            mdata = data;
+        });
+        $.get("https://raw.githubusercontent.com/PeechuR/VIStest/master/NINTENDO.csv", function(data){
+            ndata = data;
+        });
+        $.get("https://raw.githubusercontent.com/PeechuR/VIStest/master/SONY.csv", function(data){
+            sdata = data;
+        });
+        $.get("https://raw.githubusercontent.com/PeechuR/VIStest/master/PC.csv", function(data){
+            pdata = data;
+        });
 
-        var random = function (max) {
-            return (Math.random() * max).toFixed(3);
-        };
+        // var random = function (max) {
+        //     return (Math.random() * max).toFixed(3);
+        // };
 
-        for (var i = 0; i < 500; i++) {
-            data1.push([random(15), random(10), random(1)]);
-            data2.push([random(10), random(10), random(1)]);
-            data3.push([random(15), random(10), random(1)]);
-        }
+        // for (var i = 0; i < 500; i++) {
+        //     data1.push([random(15), random(10), random(1)]);
+        //     data2.push([random(10), random(10), random(1)]);
+        //     data3.push([random(15), random(10), random(1)]);
+        // }
 
         option = {
             animation: false,
@@ -95,7 +99,7 @@
                     symbolSize: function (val) {
                         return val[2] * 40;
                     },
-                    data: data1
+                    data: mdata
                 },
                 {
                     name: 'scatter2',
@@ -108,7 +112,7 @@
                     symbolSize: function (val) {
                         return val[2] * 40;
                     },
-                    data: data2
+                    data: ndata
                 },
                 {
                     name: 'scatter3',
@@ -121,7 +125,7 @@
                     symbolSize: function (val) {
                         return val[2] * 40;
                     },
-                    data: data3
+                    data: sdata
                 }
             ]
         }
